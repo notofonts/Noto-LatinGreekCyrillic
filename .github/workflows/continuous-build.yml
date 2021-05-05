@@ -26,9 +26,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Install dependencies
       run: |
-        sh build setup
-        # python -m pip install --upgrade pip
-        # pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
     - name: Build Noto Sans
       run: |
         sh build variable sources/NotoSans-MM.glyphs
