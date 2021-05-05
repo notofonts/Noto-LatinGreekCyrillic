@@ -58,5 +58,90 @@ jobs:
     - name: Store fonts
       uses: actions/upload-artifact@v1
       with:
-        name: artifacts
+        name: variable-fonts
         path: variable_ttf
+
+  fontbakery:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Pull main repository
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install fontbakery
+    - name: Download fonts
+      uses: actions/download-artifact@v2
+      id: download
+      with:
+        name: variable-fonts
+        path: build
+    - name: List files
+      run: |
+        find build
+        ls build/variable_ttf/NotoSans-VF.ttf
+        ls build/variable_ttf/NotoSansDisplay-VF.ttf
+        ls build/variable_ttf/NotoSans-Italic-VF.ttf
+        ls build/variable_ttf/NotoSansDisplay-Italic-VF.ttf
+        ls build/variable_ttf/NotoSerif-VF.ttf
+        ls build/variable_ttf/NotoSerifDisplay-VF.ttf
+        ls build/variable_ttf/NotoSerif-Italic-VF.ttf
+        ls build/variable_ttf/NotoSerifDisplay-Italic-VF.ttf
+        ls build/variable_ttf/NotoSansMono-VF.ttf
+    - name: Create Fontbakery report directory
+      run: |
+        mkdir -p fontbakery
+    - name: Fontbakery checks
+      uses: f-actions/font-bakery@v1
+      with:
+        subcmd: "check-opentype"
+        args: "-x monospace -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown fontbakery/NotoSans.md"
+        path: "build/variable_ttf/NotoSans-VF.ttf"
+    - name: Fontbakery checks
+      uses: f-actions/font-bakery@v1
+      with:
+        subcmd: "check-opentype"
+        args: "-x monospace -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown fontbakery/NotoSansDisplay.md"
+        path: "build/variable_ttf/NotoSansDisplay-VF.ttf"
+    - name: Fontbakery checks
+      uses: f-actions/font-bakery@v1
+      with:
+        subcmd: "check-opentype"
+        args: "-x monospace -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown fontbakery/NotoSans-Italic.md"
+        path: "build/variable_ttf/NotoSans-Italic-VF.ttf"
+    - name: Fontbakery checks
+      uses: f-actions/font-bakery@v1
+      with:
+        subcmd: "check-opentype"
+        args: "-x monospace -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown fontbakery/NotoSansDisplay-Italic.md"
+        path: "build/variable_ttf/NotoSansDisplay-Italic-VF.ttf"
+    - name: Fontbakery checks
+      uses: f-actions/font-bakery@v1
+      with:
+        subcmd: "check-opentype"
+        args: "-x monospace -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown fontbakery/NotoSerif.md"
+        path: "build/variable_ttf/NotoSerif-VF.ttf"
+    - name: Fontbakery checks
+      uses: f-actions/font-bakery@v1
+      with:
+        subcmd: "check-opentype"
+        args: "-x monospace -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown fontbakery/NotoSerifDisplay.md"
+        path: "build/variable_ttf/NotoSerifDisplay-VF.ttf"
+    - name: Fontbakery checks
+      uses: f-actions/font-bakery@v1
+      with:
+        subcmd: "check-opentype"
+        args: "-x monospace -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown fontbakery/NotoSerif-Italic.md"
+        path: "build/variable_ttf/NotoSerif-Italic-VF.ttf"
+    - name: Fontbakery checks
+      uses: f-actions/font-bakery@v1
+      with:
+        subcmd: "check-opentype"
+        args: "-x monospace -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown fontbakery/NotoSerifDisplay-Italic.md"
+        path: "build/variable_ttf/NotoSerifDisplay-Italic-VF.ttf"
+    - name: Fontbakery checks
+      uses: f-actions/font-bakery@v1
+      with:
+        subcmd: "check-opentype"
+        args: "-x monospace -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown fontbakery/NotoSansMono.md"
+        path: "build/variable_ttf/NotoSansMono-VF.ttf"
