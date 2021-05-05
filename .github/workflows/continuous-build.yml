@@ -30,31 +30,31 @@ jobs:
         pip install -r requirements.txt
     - name: Build Noto Sans
       run: |
-        sh build variable sources/NotoSans-MM.glyphs
+        fontmake -g sources/NotoSans-MM.glyphs -o variable
     - name: Build Noto Sans Display
       run: |
-        sh build variable sources/NotoSansDisplay-MM.glyphs
+        fontmake -g sources/NotoSansDisplay-MM.glyphs -o variable
     - name: Build Noto Sans Italic
       run: |
-        sh build variable sources/NotoSans-ItalicMM.glyphs
+        fontmake -g sources/NotoSans-ItalicMM.glyphs -o variable
     - name: Build Noto Sans Display Italic
       run: |
-        sh build variable sources/NotoSansDisplay-ItalicMM.glyphs
+        fontmake -g sources/NotoSansDisplay-ItalicMM.glyphs -o variable
     - name: Build Noto Serif
       run: |
-        sh build variable sources/NotoSerif-MM.glyphs
+        fontmake -g sources/NotoSerif-MM.glyphs -o variable
     - name: Build Noto Serif Display
       run: |
-        sh build variable sources/NotoSerifDisplay-MM.glyphs
+        fontmake -g sources/NotoSerifDisplay-MM.glyphs -o variable
     - name: Build Noto Serif Italic
       run: |
-        sh build variable sources/NotoSerif-ItalicMM.glyphs
+        fontmake -g sources/NotoSerif-ItalicMM.glyphs -o variable
     - name: Build Noto Serif Display Italic
       run: |
-        sh build variable sources/NotoSerifDisplay-ItalicMM.glyphs
+        fontmake -g sources/NotoSerifDisplay-ItalicMM.glyphs -o variable
     - name: Build Noto Sans Mono
       run: |
-        sh build variable sources/NotoSansMono-MM.glyphs
+        fontmake -g sources/NotoSansMono-MM.glyphs -o variable
     - name: Store fonts
       uses: actions/upload-artifact@v1
       with:
