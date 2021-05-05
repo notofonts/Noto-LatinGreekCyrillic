@@ -1,0 +1,62 @@
+name: Generating Variable Fonts
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Cancel previous
+      uses: styfle/cancel-workflow-action@0.8.0
+      with:
+        access_token: ${{ github.token }}
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Pull main repository
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Build Noto Sans
+      run: |
+        sh build variable sources/NotoSans-MM.glyphs
+    - name: Build Noto Sans Display
+      run: |
+        sh build variable sources/NotoSansDisplay-MM.glyphs
+    - name: Build Noto Sans Italic
+      run: |
+        sh build variable sources/NotoSans-ItalicMM.glyphs
+    - name: Build Noto Sans Display Italic
+      run: |
+        sh build variable sources/NotoSansDisplay-ItalicMM.glyphs
+    - name: Build Noto Serif
+      run: |
+        sh build variable sources/NotoSerif-MM.glyphs
+    - name: Build Noto Serif Display
+      run: |
+        sh build variable sources/NotoSerifDisplay-MM.glyphs
+    - name: Build Noto Serif Italic
+      run: |
+        sh build variable sources/NotoSerif-ItalicMM.glyphs
+    - name: Build Noto Serif Display Italic
+      run: |
+        sh build variable sources/NotoSerifDisplay-ItalicMM.glyphs
+    - name: Build Noto Sans Mono
+      run: |
+        sh build variable sources/NotoSansMono-MM.glyphs
+    - name: Store fonts
+      uses: actions/upload-artifact@v1
+      with:
+        name: artifacts
+        path: variable_ttf
