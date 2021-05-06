@@ -92,3 +92,47 @@ jobs:
       with:
         name: reports-fontbakery
         path: reports/fontbakery
+
+  fontdiffenator:
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        font-family:
+          - NotoSans
+          - NotoSansDisplay
+          - NotoSans-Italic
+          - NotoSansDisplay-Italic
+          - NotoSerif
+          - NotoSerifDisplay
+          - NotoSerif-Italic
+          - NotoSerifDisplay-Italic
+          - NotoSansMono
+        weight: [100, 400, 700, 900]
+        width: [62.5, 100]
+    steps:
+      - name: Pull main repository
+        uses: actions/checkout@v2
+      - name: Setup
+        run: |
+          pip install fontdiffenator
+      - name: Download fonts
+        uses: actions/download-artifact@v2
+        id: download
+        with:
+          name: fonts
+          path: build/variable_ttf
+      - name: Download previous fonts
+        run: |
+          mkdir -p previous
+          curl -o previous/${{ matrix.font-family }}-VF.ttf https://raw.githubusercontent.com/googlefonts/noto-fonts/main/unhinted/variable-ttf/${{ matrix.font-family }}-VF.ttf
+      - name: Run fontdiffenator
+        run: |
+          mkdir -p reports/fontdiffenator/${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}
+          fontdiffenator previous/${{ matrix.font-family }}-VF.ttf build/variable_ttf/${{ matrix.font-family }}-VF.ttf -i "wght=${{ matrix.weight }}, wdth=${{ matrix.width }}" --html -r images > ${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}.html
+          mv images ${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}.html reports/fontdiffenator/${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}
+      - name: Store FontDiffenator reports
+        uses: actions/upload-artifact@v1
+        with:
+          name: fontdiffenator-reports
+          path: reports/fontdiffenator
