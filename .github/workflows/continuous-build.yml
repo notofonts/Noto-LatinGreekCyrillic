@@ -85,7 +85,7 @@ jobs:
       uses: f-actions/font-bakery@v1
       with:
         subcmd: "check-opentype"
-        args: "-x monospace -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown reports/fontbakery/${{ matrix.font-family }}.md"
+        args: "-x monospace -x glyf_nested_components -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown reports/fontbakery/${{ matrix.font-family }}.md"
         path: "builds/variable_ttf/${{ matrix.font-family }}-VF.ttf"
     - name: Store Fontbakery reports
       uses: actions/upload-artifact@v1
