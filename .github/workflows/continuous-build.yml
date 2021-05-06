@@ -121,7 +121,7 @@ jobs:
         id: download
         with:
           name: variable-fonts
-          path: build/variable_ttf
+          path: builds/variable_ttf
       - name: Download previous fonts
         run: |
           mkdir -p previous
