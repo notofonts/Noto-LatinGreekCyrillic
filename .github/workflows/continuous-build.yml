@@ -129,7 +129,7 @@ jobs:
       - name: Run fontdiffenator
         run: |
           mkdir -p reports/fontdiffenator/${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}
-          fontdiffenator previous/${{ matrix.font-family }}-VF.ttf build/variable_ttf/${{ matrix.font-family }}-VF.ttf -i "wght=${{ matrix.weight }}, wdth=${{ matrix.width }}" --html -r images > ${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}.html
+          fontdiffenator previous/${{ matrix.font-family }}-VF.ttf builds/variable_ttf/${{ matrix.font-family }}-VF.ttf -i "wght=${{ matrix.weight }}, wdth=${{ matrix.width }}" --html -r images > ${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}.html
           mv images ${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}.html reports/fontdiffenator/${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}
       - name: Store FontDiffenator reports
         uses: actions/upload-artifact@v1
