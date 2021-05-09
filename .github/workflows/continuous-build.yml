@@ -10,9 +10,19 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        font-source:
+          - NotoSans-MM.glyphs
+          - NotoSansDisplay-MM.glyphs
+          - NotoSans-ItalicMM.glyphs
+          - NotoSansDisplay-ItalicMM.glyphs
+          - NotoSerif-MM.glyphs
+          - NotoSerifDisplay-MM.glyphs
+          - NotoSerif-ItalicMM.glyphs
+          - NotoSerifDisplay-ItalicMM.glyphs
+          - NotoSansMono-MM.glyphs
     steps:
     - name: Cancel previous
       uses: styfle/cancel-workflow-action@0.8.0
@@ -28,35 +38,101 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Build Noto Sans
+    - name: Build ${{ matrix.font-source }}
       run: |
-        fontmake -g sources/NotoSans-MM.glyphs -o variable
-    - name: Build Noto Sans Display
-      run: |
-        fontmake -g sources/NotoSansDisplay-MM.glyphs -o variable
-    - name: Build Noto Sans Italic
-      run: |
-        fontmake -g sources/NotoSans-ItalicMM.glyphs -o variable
-    - name: Build Noto Sans Display Italic
-      run: |
-        fontmake -g sources/NotoSansDisplay-ItalicMM.glyphs -o variable
-    - name: Build Noto Serif
-      run: |
-        fontmake -g sources/NotoSerif-MM.glyphs -o variable
-    - name: Build Noto Serif Display
-      run: |
-        fontmake -g sources/NotoSerifDisplay-MM.glyphs -o variable
-    - name: Build Noto Serif Italic
-      run: |
-        fontmake -g sources/NotoSerif-ItalicMM.glyphs -o variable
-    - name: Build Noto Serif Display Italic
-      run: |
-        fontmake -g sources/NotoSerifDisplay-ItalicMM.glyphs -o variable
-    - name: Build Noto Sans Mono
-      run: |
-        fontmake -g sources/NotoSansMono-MM.glyphs -o variable
+        fontmake -g sources/${{ matrix.font-source}} -o variable
     - name: Store fonts
       uses: actions/upload-artifact@v1
       with:
-        name: artifacts
+        name: variable-fonts
         path: variable_ttf
+
+  fontbakery:
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        font-family:
+          - NotoSans
+          - NotoSansDisplay
+          - NotoSans-Italic
+          - NotoSansDisplay-Italic
+          - NotoSerif
+          - NotoSerifDisplay
+          - NotoSerif-Italic
+          - NotoSerifDisplay-Italic
+          - NotoSansMono
+    steps:
+    - name: Pull main repository
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install fontbakery
+    - name: Download fonts
+      uses: actions/download-artifact@v2
+      id: download
+      with:
+        name: variable-fonts
+        path: builds/variable_ttf
+    - name: List files
+      run: |
+        find builds
+    - name: Create Fontbakery report directory
+      run: |
+        mkdir -p reports/fontbakery
+    - name: Fontbakery checks ${{ matrix.font-family }}
+      uses: f-actions/font-bakery@v1
+      with:
+        subcmd: "check-opentype"
+        args: "-x monospace -x glyf_nested_components -x fontbakery_version -x dsig --loglevel WARN --ghmarkdown reports/fontbakery/${{ matrix.font-family }}.md"
+        path: "builds/variable_ttf/${{ matrix.font-family }}-VF.ttf"
+    - name: Store Fontbakery reports
+      uses: actions/upload-artifact@v1
+      with:
+        name: reports-fontbakery
+        path: reports/fontbakery
+
+  fontdiffenator:
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        font-family:
+          - NotoSans
+          - NotoSansDisplay
+          - NotoSans-Italic
+          - NotoSansDisplay-Italic
+          - NotoSerif
+          - NotoSerifDisplay
+          - NotoSerif-Italic
+          - NotoSerifDisplay-Italic
+          - NotoSansMono
+        weight: [100, 400, 700, 900]
+        width: [62.5, 100]
+    steps:
+      - name: Pull main repository
+        uses: actions/checkout@v2
+      - name: Setup
+        run: |
+          pip install fontdiffenator
+      - name: Download fonts
+        uses: actions/download-artifact@v2
+        id: download
+        with:
+          name: variable-fonts
+          path: builds/variable_ttf
+      - name: Download previous fonts
+        run: |
+          mkdir -p previous
+          curl -o previous/${{ matrix.font-family }}-VF.ttf https://raw.githubusercontent.com/googlefonts/noto-fonts/main/unhinted/variable-ttf/${{ matrix.font-family }}-VF.ttf
+      - name: Run fontdiffenator
+        run: |
+          mkdir -p reports/fontdiffenator/${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}
+          fontdiffenator previous/${{ matrix.font-family }}-VF.ttf builds/variable_ttf/${{ matrix.font-family }}-VF.ttf -i "wght=${{ matrix.weight }}, wdth=${{ matrix.width }}" --html -r images > ${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}.html
+          mv images ${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}.html reports/fontdiffenator/${{ matrix.font-family }}-weight${{ matrix.weight }}-width${{ matrix.width }}
+      - name: Store FontDiffenator reports
+        uses: actions/upload-artifact@v1
+        with:
+          name: fontdiffenator-reports
+          path: reports/fontdiffenator
