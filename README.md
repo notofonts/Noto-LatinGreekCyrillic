@@ -13,8 +13,8 @@ The designs and glyph sets might not final.
 To obtain all sources and build tools:
 
 ```
-$ git clone --recursive https://github.com/googlefonts/noto-source.git
-$ cd noto-source
+$ git clone --recursive https://github.com/notofonts/Noto-LatinGreekCyrillic.git
+$ cd Noto-LatinGreekCyrillic
 $ ./build setup
 ```
 
@@ -27,14 +27,8 @@ $ ./build all
 other build options exist:
 
 ```bash
-$ ./build src/NotoSansOlChiki.glyphs  # build from a single source
-$               # if a font has both .glyphs and .plist files
-$ ./build src/NotoSansBrahmi/NotoSansBrahmi.plist  # build from a single source
-$ ./build src/NotoSansYi/NotoSansYi.designspace  # build from a single source
+$ ./build sources/NotoSans-MM.glyphs  # build from a single source
 $ ./build variable src/NotoSans-MM.glyphs  # build a single variable font
-$ ./build variable src/NotoSansYi/NotoSansYi.designspace  # build a single variable font
-$               # if a font has both .glyphs and .plist files
-$ ./build variable src/NotoSansBrahmi/NotoSansBrahmi.plist  # build a single variable font
 $ ./build all variable  # build all variable fonts
 $ ./build all force
 $ ./build all variable force  # continue building even when some sources fail
