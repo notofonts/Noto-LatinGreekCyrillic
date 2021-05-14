@@ -15,11 +15,9 @@ jobs:
       matrix:
         font-source:
           - NotoSans-MM.glyphs
-          - NotoSansDisplay-MM.glyphs
           - NotoSans-ItalicMM.glyphs
           - NotoSansDisplay-ItalicMM.glyphs
           - NotoSerif-MM.glyphs
-          - NotoSerifDisplay-MM.glyphs
           - NotoSerif-ItalicMM.glyphs
           - NotoSerifDisplay-ItalicMM.glyphs
           - NotoSansMono-MM.glyphs
@@ -54,11 +52,9 @@ jobs:
       matrix:
         font-family:
           - NotoSans
-          - NotoSansDisplay
           - NotoSans-Italic
           - NotoSansDisplay-Italic
           - NotoSerif
-          - NotoSerifDisplay
           - NotoSerif-Italic
           - NotoSerifDisplay-Italic
           - NotoSansMono
@@ -100,11 +96,9 @@ jobs:
       matrix:
         font-family:
           - NotoSans
-          - NotoSansDisplay
           - NotoSans-Italic
           - NotoSansDisplay-Italic
           - NotoSerif
-          - NotoSerifDisplay
           - NotoSerif-Italic
           - NotoSerifDisplay-Italic
           - NotoSansMono
