@@ -1,3 +1,0 @@
-[submodule "Lib/fontmake"]
-	path = scripts/fontmake
-	url = https://github.com/googlefonts/fontmake.git
