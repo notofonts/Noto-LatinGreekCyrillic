@@ -16,7 +16,6 @@ jobs:
         font-source:
           - NotoSans-MM.glyphs
           - NotoSans-ItalicMM.glyphs
-          - NotoSansDisplay-ItalicMM.glyphs
           - NotoSerif-MM.glyphs
           - NotoSerif-ItalicMM.glyphs
           - NotoSerifDisplay-ItalicMM.glyphs
@@ -53,7 +52,6 @@ jobs:
         font-family:
           - NotoSans
           - NotoSans-Italic
-          - NotoSansDisplay-Italic
           - NotoSerif
           - NotoSerif-Italic
           - NotoSerifDisplay-Italic
@@ -97,7 +95,6 @@ jobs:
         font-family:
           - NotoSans
           - NotoSans-Italic
-          - NotoSansDisplay-Italic
           - NotoSerif
           - NotoSerif-Italic
           - NotoSerifDisplay-Italic
