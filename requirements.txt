@@ -1,1 +1,1 @@
-fontmake[pathops,lxml]==2.1.0
+fontmake[pathops,lxml]==2.4.2
