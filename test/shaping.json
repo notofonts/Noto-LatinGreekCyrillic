@@ -1,0 +1,409 @@
+{
+	"tests": [
+		{
+			"note": "Check slashed zero",
+			"input": "0\uFE00",
+			"expectation": "zero.slash"
+		},
+		{
+			"note": "Check soft dotted characters",
+			"input": "i̍j̍ị̍ḭ̍ᶨ̍ᶤ̍į̍ɉ̍ʝ̍ʲ̍ϳ̍і̍ј̍ᵢ̍ᶖ̍ɨ̍ⁱ̍ⅈ̍ⅉ̍ⱼ̍",
+			"expectation": "dotlessi|uni030D|uni0237|uni030D|idotbelowdotless|uni030D|itildebelowdotless|uni030D|jcrossedtailmoddotless|uni030D|istrokemoddotless|uni030D|iogonekdotless|uni030D|jstrokedotless|uni030D|jcrossedtaildotless|uni030D|jmoddotless|uni030D|yotdotless|uni030D|idotlesscy|uni030D|jedotlesscy|uni030D|isubscriptdotless|uni030D|iretroflexhookdotless|uni030D|istrokedotless|uni030D|imoddotless|uni030D|iitalicDoubleStruckdotless|uni030D|jitalicDoubleStruckdotless|uni030D|jsubscriptdotless|uni030D"
+		},
+		{
+			"note": "Check soft dotted characters with combining marks below",
+			"input": "i̱̍",
+			"expectation": "dotlessi|uni0331|uni030D"
+		},
+		{
+			"note": "Check tone bar ligatures",
+			"input": "˩˥ ˩˥˩",
+			"expectation": "uni02E902E5|space|uni02E902E502E9"
+		},
+		{
+			"note": "Check non Navajo variants",
+			"language": "en",
+			"input": "ĄĘĮǪŲąęįǫų",
+			"expectation": "Aogonek|Eogonek|Iogonek|uni01EA|Uogonek|aogonek|eogonek|iogonek|uni01EB|uogonek"
+		},
+		{
+			"note": "Check Navajo locale variants",
+			"exclude": [
+				"NotoSans-VF.ttf",
+				"NotoSans-Italic-VF.ttf"
+			],
+			"language": "nav",
+			"input": "ĄĘĮǪŲąęįǫų",
+			"expectation": "Aogonek.loclNAV|Eogonek.loclNAV|Iogonek.loclNAV|uni01EA|Uogonek.loclNAV|aogonek.loclNAV|eogonek.loclNAV|iogonek.loclNAV|uni01EB|uogonek.loclNAV"
+		},
+		{
+			"note": "Check Navajo locale variants",
+			"exclude": [
+				"NotoSerif-VF.ttf",
+				"NotoSerif-Italic-VF.ttf",
+				"NotoSerifDisplay-Italic-VF.ttf"
+			],
+			"language": "nav",
+			"input": "ĄĘĮǪŲąęįǫų",
+			"expectation": "Aogonek.loclNAV|Eogonek.loclNAV|Iogonek.loclNAV|uni01EA|Uogonek.loclNAV|aogonek.loclNAV|eogonek.loclNAV|iogonek|uni01EB|uogonek.loclNAV"
+		},
+		{
+			"note": "Check non Romanian locale variants",
+			"language": "en",
+			"input": "ŞŢşţ",
+			"expectation": "Scedilla|uni0162|scedilla|uni0163"
+		},
+		{
+			"note": "Check Romanian locale variants",
+			"language": "ro",
+			"input": "ŞŢşţ",
+			"expectation": "uni0218|uni021A|uni0219|uni021B"
+		},
+		{
+			"note": "Check Romanian locale variants with c2sc",
+			"language": "ro",
+			"input": "ŞŢ",
+			"features": {
+				"c2sc": true
+			},
+			"expectation": "uni0219.sc|uni021B.sc"
+		},
+		{
+			"note": "Check Romanian locale variants with smcp",
+			"language": "ro",
+			"input": "şţ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni0219.sc|uni021B.sc"
+		},
+		{
+			"note": "Check Marshallese locale variants",
+			"language": "mh",
+			"input": "ĻļM̧m̧ŅņO̧o̧",
+			"expectation": "uni013B.loclMAH|uni013C.loclMAH|M|uni0327|m|uni0327|uni0145.loclMAH|uni0146.loclMAH|O|uni0327|o|uni0327"
+		},
+		{
+			"note": "Check Catalan locale variants",
+			"language": "ca",
+			"input": "L·Ll·l",
+			"expectation": "Ldot|L|ldot|l"
+		},
+		{
+			"note": "Check Catalan locale variants in small caps",
+			"language": "ca",
+			"input": "l·l",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "ldot.sc|l.sc"
+		},
+		{
+			"note": "Check Catalan locale variants",
+			"language": "ca",
+			"input": "L·Ll·l",
+			"expectation": "Ldot|L|ldot|l"
+		},
+		{
+			"note": "Check Serbian locale variants",
+			"language": "sr",
+			"input": "б",
+			"expectation": "uni0431.loclSRB"
+		},
+		{
+			"note": "Check non Serbian/Macedonian locale variants",
+			"language": "ru",
+			"input": "бгдптѓ",
+			"expectation": "uni0431|uni0433|uni0434|uni043F|uni0442|uni0453"
+		},
+		{
+			"note": "Check Serbian locale variants in upright",
+			"exclude": [
+				"NotoSans-Italic-VF.ttf",
+				"NotoSerifDisplay-Italic-VF.ttf",
+				"NotoSerif-Italic-VF.ttf"
+			],
+			"language": "sr",
+			"input": "бгдптѓ",
+			"expectation": "uni0431.loclSRB|uni0433|uni0434|uni043F|uni0442|uni0453"
+		},
+		{
+			"note": "Check Macedonian locale variants in italic",
+			"exclude": [
+				"NotoSans-VF.ttf",
+				"NotoSerif-VF.ttf"
+			],
+			"language": "mk",
+			"input": "бгдптѓ",
+			"expectation": "uni0431.loclSRB|uni0433.loclSRB|uni0434.loclSRB|uni043F.loclSRB|uni0442.loclSRB|uni0453.loclMKD"
+		},
+		{
+			"note": "Check Math Greek",
+			"input": "Ωμφ",
+			"exclude": [
+				"NotoSans-VF.ttf",
+				"NotoSans-Italic-VF.ttf"
+			],
+			"features": {
+				"mgrk": true
+			},
+			"expectation": "uni2126|uni00B5|uni03D5"
+		},
+		{
+			"note": "Check sinf for digits",
+			"input": "0123456789",
+			"features": {
+				"sinf": true
+			},
+			"expectation": "uni2080|uni2081|uni2082|uni2083|uni2084|uni2085|uni2086|uni2087|uni2088|uni2089"
+		},
+		{
+			"note": "Check subs for digits",
+			"input": "0123456789",
+			"features": {
+				"subs": true
+			},
+			"expectation": "uni2080|uni2081|uni2082|uni2083|uni2084|uni2085|uni2086|uni2087|uni2088|uni2089"
+		},
+		{
+			"note": "Check sups for digits",
+			"input": "0123456789",
+			"features": {
+				"sups": true
+			},
+			"expectation": "uni2070|uni00B9|uni00B2|uni00B3|uni2074|uni2075|uni2076|uni2077|uni2078|uni2079"
+		},
+		{
+			"note": "Check numr for digits",
+			"input": "0123456789",
+			"features": {
+				"numr": true
+			},
+			"expectation": "zero.numr|one.numr|two.numr|three.numr|four.numr|five.numr|six.numr|seven.numr|eight.numr|nine.numr"
+		},
+		{
+			"note": "Check dnom for digits",
+			"input": "0123456789",
+			"features": {
+				"dnom": true
+			},
+			"expectation": "zero.dnom|one.dnom|two.dnom|three.dnom|four.dnom|five.dnom|six.dnom|seven.dnom|eight.dnom|nine.dnom"
+		},
+		{
+			"note": "Check frac for digits",
+			"input": "0/1 2/3 4/5 6/7 8/9",
+			"features": {
+				"frac": true
+			},
+			"expectation": "zero.numr|fraction|one.dnom|space|two.numr|fraction|three.dnom|space|four.numr|fraction|five.dnom|space|six.numr|fraction|seven.dnom|space|eight.numr|fraction|nine.dnom"
+		},
+		{
+			"note": "Check ordn for a/o after digit",
+			"input": "0a 1a 2a 3a 4a 5a 6a 7a 8a 9a 0o 1o 2o 3o 4o 5o 6o 7o 8o 9o",
+			"features": {
+				"ordn": true
+			},
+			"expectation": "zero|ordfeminine|space|one|ordfeminine|space|two|ordfeminine|space|three|ordfeminine|space|four|ordfeminine|space|five|ordfeminine|space|six|ordfeminine|space|seven|ordfeminine|space|eight|ordfeminine|space|nine|ordfeminine|space|zero|ordmasculine|space|one|ordmasculine|space|two|ordmasculine|space|three|ordmasculine|space|four|ordmasculine|space|five|ordmasculine|space|six|ordmasculine|space|seven|ordmasculine|space|eight|ordmasculine|space|nine|ordmasculine"
+		},
+		{
+			"note": "Check lnum (already the default)",
+			"input": "0123456789",
+			"features": {
+				"lnum": true
+			},
+			"expectation": "zero|one|two|three|four|five|six|seven|eight|nine"
+		},
+		{
+			"note": "Check pnum",
+			"input": "0123456789",
+			"features": {
+				"pnum": true
+			},
+			"expectation": "zero.lf|one.lf|two.lf|three.lf|four.lf|five.lf|six.lf|seven.lf|eight.lf|nine.lf"
+		},
+		{
+			"note": "Check pnum with onum",
+			"input": "0123456789",
+			"features": {
+				"onum": true,
+				"pnum": true
+			},
+			"expectation": "zero.osf|one.osf|two.osf|three.osf|four.osf|five.osf|six.osf|seven.osf|eight.osf|nine.osf"
+		},
+		{
+			"note": "Check onum",
+			"input": "0123456789",
+			"features": {
+				"onum": true
+			},
+			"expectation": "zero.tosf|one.tosf|two.tosf|three.tosf|four.tosf|five.tosf|six.tosf|seven.tosf|eight.tosf|nine.tosf"
+		},
+		{
+			"note": "Check Basic Latin small capitals",
+			"input": "abcdefghijklmnopqrstuvwxyz",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "a.sc|b.sc|c.sc|d.sc|e.sc|f.sc|g.sc|h.sc|i.sc|j.sc|k.sc|l.sc|m.sc|n.sc|o.sc|p.sc|q.sc|r.sc|s.sc|t.sc|u.sc|v.sc|w.sc|x.sc|y.sc|z.sc"
+		},
+		{
+			"note": "Check Latin-1 Supplement small capitals",
+			"input": "ßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "germandbls.sc|agrave.sc|aacute.sc|acircumflex.sc|atilde.sc|adieresis.sc|aring.sc|ae.sc|ccedilla.sc|egrave.sc|eacute.sc|ecircumflex.sc|edieresis.sc|igrave.sc|iacute.sc|icircumflex.sc|idieresis.sc|eth.sc|ntilde.sc|ograve.sc|oacute.sc|ocircumflex.sc|otilde.sc|odieresis.sc|oslash.sc|ugrave.sc|uacute.sc|ucircumflex.sc|udieresis.sc|yacute.sc|thorn.sc|ydieresis.sc"
+		},
+		{
+			"note": "Check Latin Extended-A small capitals (TODO: longs)",
+			"input": "āăąćĉċčďđēĕėęěĝğġģĥħĩīĭįıĳĵķĸĺļľŀłńņňŉŋōŏőœŕŗřśŝşšţťŧũūŭůűųŵŷźżžſ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "amacron.sc|abreve.sc|aogonek.sc|cacute.sc|ccircumflex.sc|cdotaccent.sc|ccaron.sc|dcaron.sc|dcroat.sc|emacron.sc|ebreve.sc|edotaccent.sc|eogonek.sc|ecaron.sc|gcircumflex.sc|gbreve.sc|gdotaccent.sc|uni0123.sc|hcircumflex.sc|hbar.sc|itilde.sc|imacron.sc|ibreve.sc|iogonek.sc|dotlessi|ij.sc|jcircumflex.sc|uni0137.sc|kgreenlandic|lacute.sc|uni013C.sc|lcaron.sc|ldot.sc|lslash.sc|nacute.sc|uni0146.sc|ncaron.sc|napostrophe|eng.sc|omacron.sc|obreve.sc|ohungarumlaut.sc|oe.sc|racute.sc|uni0157.sc|rcaron.sc|sacute.sc|scircumflex.sc|scedilla.sc|scaron.sc|uni0163.sc|tcaron.sc|tbar.sc|utilde.sc|umacron.sc|ubreve.sc|uring.sc|uhungarumlaut.sc|uogonek.sc|wcircumflex.sc|ycircumflex.sc|zacute.sc|zdotaccent.sc|zcaron.sc|longs"
+		},
+		{
+			"note": "Check Latin Extended-B small capitals (TODO)",
+			"input": "ƀƃƅƈƌƒƕƙƚƞơƣƥƨƭưƴƶƹƽƿǆǉǌǎǐǒǔǖǘǚǜǝǟǡǣǥǧǩǫǭǯǰǳǵǹǻǽǿȁȃȅȇȉȋȍȏȑȓȕȗșțȝȟȣȥȧȩȫȭȯȱȳȼȿɀɂɇɉɋɍɏ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni0180|uni0183|uni0185|uni0188|uni018C|fhook|uni0195|uni0199|uni019A|uni019E|ohorn|uni01A3|uni01A5|uni01A8|uni01AD|uhorn|uni01B4|uni01B6|uni01B9|uni01BD|uni01BF|uni01C6|uni01C9|uni01CC|uni01CE|uni01D0|uni01D2|uni01D4|uni01D6|uni01D8|uni01DA|uni01DC|uni01DD|uni01DF|uni01E1|uni01E3|uni01E5|gcaron|uni01E9|uni01EB|uni01ED|uni01EF|uni01F0|uni01F3|uni01F5|uni01F9|aringacute.sc|aeacute.sc|oslashacute.sc|uni0201|uni0203|uni0205|uni0207|uni0209|uni020B|uni020D|uni020F|uni0211|uni0213|uni0215|uni0217|uni0219.sc|uni021B.sc|uni021D|uni021F|uni0223|uni0225|uni0227|uni0229|uni022B|uni022D|uni022F|uni0231|uni0233|uni023C|uni023F|uni0240|glottalstopcased|uni0247|uni0249|uni024B|uni024D|uni024F"
+		},
+		{
+			"note": "Check IPA Extensions small capitals (TODO)",
+			"input": "ɐɑɒɓɔɖɗəɛɜɠɡɣɥɦɨɩɪɫɬɯɱɲɵɽʀʂʃʇʈʉʊʋʌʒʝʞ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni0250|uni0251|uni0252|uni0253|uni0254|uni0256|uni0257|uni0259|uni025B|uni025C|uni0260|uni0261|uni0263|uni0265|uni0266|uni0268|uni0269|iotaserifed|uni026B|uni026C|uni026F|uni0271|uni0272|uni0275|uni027D|uni0280|uni0282|uni0283|uni0287|uni0288|uni0289|uni028A|uni028B|uni028C|uni0292|uni029D|uni029E"
+		},
+		{
+			"note": "Check Greek and Coptic (Greek) small capitals (TODO non basic)",
+			"input": "ͱͳͷͻͼͽΐάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώϐϑϕϖϗϙϛϝϟϡϰϱϲϳϵϸϻ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni0371|uni0373|uni0377|uni037B|uni037C|uni037D|iotadieresistonos.sc|alphatonos.sc|epsilontonos.sc|etatonos.sc|iotatonos.sc|upsilondieresistonos.sc|alpha.sc|beta.sc|gamma.sc|delta.sc|epsilon.sc|zeta.sc|eta.sc|theta.sc|iota.sc|kappa.sc|lambda.sc|uni03BC.sc|nu.sc|xi.sc|omicron.sc|pi.sc|rho.sc|uni03C2.sc|sigma.sc|tau.sc|upsilon.sc|phi.sc|chi.sc|psi.sc|omega.sc|iotadieresis.sc|upsilondieresis.sc|omicrontonos.sc|upsilontonos.sc|omegatonos.sc|uni03D0|uni03D1|uni03D5|uni03D6|uni03D7.sc|uni03D9|uni03DB|uni03DD|uni03DF|uni03E1|uni03F0|uni03F1|uni03F2|uni03F3|uni03F5|uni03F8|uni03FB"
+		},
+		{
+			"note": "Check Cyrillic small capitals (TODO)",
+			"input": "абвгдежзийклмнопрстуфхцчшщъыьэюяѐёђѓєѕіїјљњћќѝўџѡѣѥѧѩѫѭѯѱѳѵѷѹѻѽѿҁҋҍҏґғҕҗҙқҝҟҡңҥҧҩҫҭүұҳҵҷҹһҽҿӂӄӆӈӊӌӎӏӑӓӕӗәӛӝӟӡӣӥӧөӫӭӯӱӳӵӷӹӻӽӿ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni0430|uni0431|uni0432|uni0433|uni0434|uni0435|uni0436|uni0437|uni0438|uni0439|uni043A|uni043B|uni043C|uni043D|uni043E|uni043F|uni0440|uni0441|uni0442|uni0443|uni0444|uni0445|uni0446|uni0447|uni0448|uni0449|uni044A|uni044B|uni044C|uni044D|uni044E|uni044F|uni0450|uni0451|uni0452|uni0453|uni0454|uni0455|uni0456|uni0457|uni0458|uni0459|uni045A|uni045B|uni045C|uni045D|uni045E|uni045F|uni0461|uni0463|uni0465|uni0467|uni0469|uni046B|uni046D|uni046F|uni0471|uni0473|uni0475|uni0477|uni0479|omegaroundcy|omegatitlocy|otcy|uni0481|uni048B|uni048D|uni048F|uni0491|uni0493|uni0495|uni0497|uni0499|uni049B|uni049D|uni049F|uni04A1|uni04A3|uni04A5|uni04A7|uni04A9|uni04AB|uni04AD|uni04AF|uni04B1|uni04B3|uni04B5|uni04B7|uni04B9|uni04BB|uni04BD|uni04BF|uni04C2|uni04C4|uni04C6|uni04C8|uni04CA|uni04CC|uni04CE|uni04CF|uni04D1|uni04D3|uni04D5|uni04D7|uni04D9|uni04DB|uni04DD|uni04DF|uni04E1|uni04E3|uni04E5|uni04E7|uni04E9|uni04EB|uni04ED|uni04EF|uni04F1|uni04F3|uni04F5|uni04F7|uni04F9|uni04FB|uni04FD|uni04FF"
+		},
+		{
+			"note": "Check Cyrillic Supplement small capitals (TODO)",
+			"input": "ԁԃԅԇԉԋԍԏԑԓԕԗԙԛԝԟԡԣԥԧԩԫԭԯ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni0501|uni0503|uni0505|uni0507|uni0509|uni050B|uni050D|uni050F|uni0511|uni0513|uni0515|uni0517|uni0519|uni051B|uni051D|uni051F|uni0521|uni0523|uni0525|uni0527|uni0529|uni052B|uni052D|uni052F"
+		},
+		{
+			"note": "Check Cyrillic Extended-C small capitals (TODO)",
+			"input": "ᲀᲁᲂᲃᲄᲅᲆᲇᲈ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "veroundedcy|delongleggedcy|onarrowcy|eswidecy|tetallcy|tethreeleggedcy|hardsigntallcy|yattallcy|ukunblendedcy"
+		},
+		{
+			"note": "Check Phonetic Extensions and Phonetic Extensions Supplement small capitals (TODO)",
+			"input": "ᵹᵽᶎ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni1D79|uni1D7D|uni1D8E"
+		},
+		{
+			"note": "Check Latin Extended Additional small capitals (TODO)",
+			"input": "ḁḃḅḇḉḋḍḏḑḓḕḗḙḛḝḟḡḣḥḧḩḫḭḯḱḳḵḷḹḻḽḿṁṃṅṇṉṋṍṏṑṓṕṗṙṛṝṟṡṣṥṧṩṫṭṯṱṳṵṷṹṻṽṿẁẃẅẇẉẋẍẏẑẓẕẖẗẘẙẚẛạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹỻỽỿ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni1E01|uni1E03|uni1E05|uni1E07|uni1E09|uni1E0B|uni1E0D|uni1E0F|uni1E11|uni1E13|uni1E15|uni1E17|uni1E19|uni1E1B|uni1E1D|uni1E1F|uni1E21|uni1E23|uni1E25|uni1E27|uni1E29|uni1E2B|uni1E2D|uni1E2F|uni1E31|uni1E33|uni1E35|uni1E37|uni1E39|uni1E3B|uni1E3D|uni1E3F|uni1E41|uni1E43|uni1E45|uni1E47|uni1E49|uni1E4B|uni1E4D|uni1E4F|uni1E51|uni1E53|uni1E55|uni1E57|uni1E59|uni1E5B|uni1E5D|uni1E5F|uni1E61|uni1E63|uni1E65|uni1E67|uni1E69|uni1E6B|uni1E6D|uni1E6F|uni1E71|uni1E73|uni1E75|uni1E77|uni1E79|uni1E7B|uni1E7D|uni1E7F|wgrave.sc|wacute.sc|wdieresis.sc|uni1E87|uni1E89|uni1E8B|uni1E8D|uni1E8F|uni1E91|uni1E93|uni1E95|uni1E96|uni1E97|uni1E98|uni1E99|uni1E9A|uni1E9B|uni1EA1|uni1EA3|uni1EA5|uni1EA7|uni1EA9|uni1EAB|uni1EAD|uni1EAF|uni1EB1|uni1EB3|uni1EB5|uni1EB7|uni1EB9|uni1EBB|uni1EBD|uni1EBF|uni1EC1|uni1EC3|uni1EC5|uni1EC7|uni1EC9|uni1ECB|uni1ECD|uni1ECF|uni1ED1|uni1ED3|uni1ED5|uni1ED7|uni1ED9|uni1EDB|uni1EDD|uni1EDF|uni1EE1|uni1EE3|uni1EE5|uni1EE7|uni1EE9|uni1EEB|uni1EED|uni1EEF|uni1EF1|ygrave.sc|uni1EF5|uni1EF7|uni1EF9|uni1EFB|uni1EFD|uni1EFF"
+		},
+		{
+			"note": "Check Greek Extended small capitals",
+			"input": "ἀἁἂἃἄἅἆἇἐἑἒἓἔἕἠἡἢἣἤἥἦἧἰἱἲἳἴἵἶἷὀὁὂὃὄὅὐὑὒὓὔὕὖὗὠὡὢὣὤὥὦὧὰάὲέὴήὶίὸόὺύὼώᾀᾁᾂᾃᾄᾅᾆᾇᾐᾑᾒᾓᾔᾕᾖᾗᾠᾡᾢᾣᾤᾥᾦᾧᾰᾱᾲᾳᾴᾶᾷιῂῃῄῆῇῐῑῒΐῖῗῠῡῢΰῤῥῦῧῲῳῴῶῷ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni1F00.sc|uni1F01.sc|uni1F02.sc|uni1F03.sc|uni1F04.sc|uni1F05.sc|uni1F06.sc|uni1F07.sc|uni1F10.sc|uni1F11.sc|uni1F12.sc|uni1F13.sc|uni1F14.sc|uni1F15.sc|uni1F20.sc|uni1F21.sc|uni1F22.sc|uni1F23.sc|uni1F24.sc|uni1F25.sc|uni1F26.sc|uni1F27.sc|uni1F30.sc|uni1F31.sc|uni1F32.sc|uni1F33.sc|uni1F34.sc|uni1F35.sc|uni1F36.sc|uni1F37.sc|uni1F40.sc|uni1F41.sc|uni1F42.sc|uni1F43.sc|uni1F44.sc|uni1F45.sc|uni1F50.sc|uni1F51.sc|uni1F52.sc|uni1F53.sc|uni1F54.sc|uni1F55.sc|uni1F56.sc|uni1F57.sc|uni1F60.sc|uni1F61.sc|uni1F62.sc|uni1F63.sc|uni1F64.sc|uni1F65.sc|uni1F66.sc|uni1F67.sc|uni1F70.sc|uni1F71.sc|uni1F72.sc|uni1F73.sc|uni1F74.sc|uni1F75.sc|uni1F76.sc|uni1F77.sc|uni1F78.sc|uni1F79.sc|uni1F7A.sc|uni1F7B.sc|uni1F7C.sc|uni1F7D.sc|uni1F80.sc|uni1F81.sc|uni1F82.sc|uni1F83.sc|uni1F84.sc|uni1F85.sc|uni1F86.sc|uni1F87.sc|uni1F90.sc|uni1F91.sc|uni1F92.sc|uni1F93.sc|uni1F94.sc|uni1F95.sc|uni1F96.sc|uni1F97.sc|uni1FA0.sc|uni1FA1.sc|uni1FA2.sc|uni1FA3.sc|uni1FA4.sc|uni1FA5.sc|uni1FA6.sc|uni1FA7.sc|uni1FB0.sc|uni1FB1.sc|uni1FB2.sc|uni1FB3.sc|uni1FB4.sc|uni1FB6.sc|uni1FB7.sc|uni1FBE|uni1FC2.sc|uni1FC3.sc|uni1FC4.sc|uni1FC6.sc|uni1FC7.sc|uni1FD0.sc|uni1FD1.sc|uni1FD2.sc|uni1FD3.sc|uni1FD6.sc|uni1FD7.sc|uni1FE0.sc|uni1FE1.sc|uni1FE2.sc|uni1FE3.sc|uni1FE4.sc|uni1FE5.sc|uni1FE6.sc|uni1FE7.sc|uni1FF2.sc|uni1FF3.sc|uni1FF4.sc|uni1FF6.sc|uni1FF7.sc"
+		},
+		{
+			"note": "Check Letterlike Symbols, Number Forms small capitals (TODO)",
+			"input": "ⅎↄ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni214E|uni2184"
+		},
+		{
+			"note": "Check Latin Extended-C small capitals (TODO)",
+			"input": "ⱡⱥⱦⱨⱪⱬⱳⱶ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uni2C61|uni2C65|uni2C66|uni2C68|uni2C6A|uni2C6C|uni2C73|uni2C76"
+		},
+		{
+			"note": "Check Cyrillic Extended-B small capitals (TODO)",
+			"input": "ꙁꙃꙅꙇꙉꙋꙍꙏꙑꙓꙕꙗꙙꙛꙝꙟꙡꙣꙥꙧꙩꙫꙭꚁꚃꚅꚇꚉꚋꚍꚏꚑꚓꚕꚗꚙꚛ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uniA641|uniA643|dzereversedcy|uniA647|uniA649|ukmonographcy|omegabroadcy|yerneutralcy|yerubackyercy|yatiotifiedcy|yureversedcy|uniA657|yusclosedlittlecy|yusblendedcy|yusiotifiedclosedlittlecy|uniA65F|tsereversedcy|desoftcy|elsoftcy|emsoftcy|omonocularcy|obinocularcy|odoublemonocularcy|uniA681|uniA683|uniA685|uniA687|uniA689|uniA68B|uniA68D|uniA68F|uniA691|uniA693|uniA695|uniA697|odoublecy|ocrossedcy"
+		},
+		{
+			"note": "Check Latin Extended-D, Latin Extended-E small capitals (TODO)",
+			"input": "ꜣꜥꜧꜩꜫꜭꜯꜳꜵꜷꜹꜻꜽꜿꝁꝃꝅꝇꝉꝋꝍꝏꝑꝓꝕꝗꝙꝛꝝꝟꝡꝣꝥꝧꝩꝫꝭꝯꝺꝼꝿꞁꞃꞅꞇꞌꞑꞓꞔꞗꞙꞛꞝꞟꞡꞣꞥꞧꞩꞵꞷꞹꟃꭓ",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "uniA723|uniA725|uniA727|uniA729|uniA72B|uniA72D|uniA72F|uniA733|uniA735|uniA737|uniA739|uniA73B|uniA73D|uniA73F|uniA741|uniA743|uniA745|uniA747|uniA749|uniA74B|uniA74D|uniA74F|uniA751|uniA753|uniA755|uniA757|uniA759|uniA75B|uniA75D|uniA75F|uniA761|uniA763|uniA765|uniA767|uniA769|uniA76B|uniA76D|uniA76F|uniA77A|uniA77C|uniA77F|uniA781|uniA783|uniA785|uniA787|uniA78C|uniA791|uniA793|cpalatalhook|bflourish|fstroke|aevolapuk|oevolapuk|uevolapuk|uniA7A1|uniA7A3|uniA7A5|uniA7A7|uniA7A9|uniA7B5|uniA7B7|uni1D7E|wanglicana|uniAB53"
+		},
+		{
+			"note": "Check ß small capital",
+			"input": "ß",
+			"features": {
+				"smcp": true
+			},
+			"expectation": "germandbls.sc"
+		},
+		{
+			"note": "Check Latin capital small capitals",
+			"input": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+			"features": {
+				"c2sc": true
+			},
+			"expectation": "a.sc|b.sc|c.sc|d.sc|e.sc|f.sc|g.sc|h.sc|i.sc|j.sc|k.sc|l.sc|m.sc|n.sc|o.sc|p.sc|q.sc|r.sc|s.sc|t.sc|u.sc|v.sc|w.sc|x.sc|y.sc|z.sc"
+		},
+		{
+			"note": "Check case with digits",
+			"input": "0123456789",
+			"features": {
+				"case": true
+			},
+			"expectation": "zero.lf|one.lf|two.lf|three.lf|four.lf|five.lf|six.lf|seven.lf|eight.lf|nine.lf"
+		},
+		{
+			"note": "Check liga",
+			"input": "fi ff fl ffi ffl",
+			"expectation": "fi|space|f_f|space|fl|space|f_f_i|space|f_f_l"
+		},
+		{
+			"note": "Check liga for italic in Ewe",
+			"input": "fi ff fl ffi ffl",
+			"exclude": [
+				"NotoSans-VF.ttf",
+				"NotoSerif-VF.ttf"
+			],
+			"language": "ewe",
+			"expectation": "f_i.ss02|space|f_f.ss02|space|f_l.ss02|space|f_f_i.ss02|space|f_f_l.ss02"
+		}
+	]
+}
